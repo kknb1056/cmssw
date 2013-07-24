@@ -34,6 +34,8 @@
 
 //#include <iostream>
 
+#include "MarksAnalysers/TrackingParticleComparison/interface/TPComparisonNtuple.h"
+
 using namespace std;
 using namespace edm;
 
@@ -46,6 +48,7 @@ MultiTrackValidator::MultiTrackValidator(const edm::ParameterSet& pset):MultiTra
   string histoProducerAlgoName = psetForHistoProducerAlgo.getParameter<string>("ComponentName");
   histoProducerAlgo_ = MTVHistoProducerAlgoFactory::get()->create(histoProducerAlgoName ,psetForHistoProducerAlgo);
   histoProducerAlgo_->setDQMStore(dbe_);
+  histoProducerAlgo_->setDebugNtuple( &comparisonNtuple_ );
 
   dirName_ = pset.getParameter<std::string>("dirName");
   associatormap = pset.getParameter< edm::InputTag >("associatormap");
@@ -116,6 +119,12 @@ void MultiTrackValidator::beginRun(Run const&, EventSetup const& setup) {
 
       dbe_->setCurrentFolder(dirName.c_str());
       
+      comparisonNtuple_.setCurrentMatchedTrackCollection( www+ww*label.size() );
+      std::string prefixToRemove="Tracking/Track/";
+      size_t findResult=dirName.find( prefixToRemove );
+      if( findResult!=std::string::npos ) comparisonNtuple_.setCollectionName( dirName.substr( findResult+prefixToRemove.size() ) );
+      else comparisonNtuple_.setCollectionName( dirName );
+
       // vector of vector initialization
       histoProducerAlgo_->initialize(); //TO BE FIXED. I'D LIKE TO AVOID THIS CALL
 
@@ -147,6 +156,8 @@ void MultiTrackValidator::beginRun(Run const&, EventSetup const& setup) {
 void MultiTrackValidator::analyze(const edm::Event& event, const edm::EventSetup& setup){
   using namespace reco;
   
+  comparisonNtuple_.newEvent();
+
   edm::LogInfo("TrackValidator") << "\n====================================================" << "\n"
 				 << "Analyzing new event" << "\n"
 				 << "====================================================\n" << "\n";
@@ -170,6 +181,8 @@ void MultiTrackValidator::analyze(const edm::Event& event, const edm::EventSetup
   event.getByLabel(bsSrc,recoBeamSpotHandle);
   reco::BeamSpot bs = *recoBeamSpotHandle;      
   
+  comparisonNtuple_.setBeamSpot( bs.x0(), bs.y0(), bs.z0() );
+
   edm::Handle< vector<PileupSummaryInfo> > puinfoH;
   event.getByLabel(label_pileupinfo,puinfoH);
   PileupSummaryInfo puinfo;      
@@ -188,6 +201,8 @@ void MultiTrackValidator::analyze(const edm::Event& event, const edm::EventSetup
   int w=0; //counter counting the number of sets of histograms
   for (unsigned int ww=0;ww<associators.size();ww++){
     for (unsigned int www=0;www<label.size();www++){
+      comparisonNtuple_.setCurrentMatchedTrackCollection( w );
+
       //
       //get collections from the event
       //

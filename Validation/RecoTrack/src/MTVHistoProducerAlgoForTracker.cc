@@ -13,7 +13,14 @@
 #include "TMath.h"
 #include <TF1.h>
 
+#include "MarksAnalysers/TrackingParticleComparison/interface/TPComparisonNtuple.h"
+
 using namespace std;
+
+void MTVHistoProducerAlgoForTracker::setDebugNtuple( tpanalyser::TPComparisonNtuple* ntuple )
+{
+	pComparisonNtuple_=ntuple;
+}
 
 MTVHistoProducerAlgoForTracker::MTVHistoProducerAlgoForTracker(const edm::ParameterSet& pset): MTVHistoProducerAlgo(pset){
   //parameters for _vs_eta plots
@@ -1311,7 +1318,7 @@ void MTVHistoProducerAlgoForTracker::fill_ResoAndPull_recoTrack_histos(int count
   h_eta[count]->Fill(etares);
   etares_vs_eta[count]->Fill(getEta(track.eta()),etares);
   
-
+  pComparisonNtuple_->addMatchedTrack( dxyRec, dzRec, dxySim, dzSim, getEta(track.eta()), getPt(ptRec) );
 	
   //resolution of track params: fill 2D histos
   dxyres_vs_eta[count]->Fill(getEta(track.eta()),dxyRec-dxySim);

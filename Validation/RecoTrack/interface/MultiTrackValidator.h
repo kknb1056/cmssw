@@ -12,7 +12,7 @@
 #include "FWCore/Framework/interface/EDAnalyzer.h"
 #include "Validation/RecoTrack/interface/MultiTrackValidatorBase.h"
 #include "Validation/RecoTrack/interface/MTVHistoProducerAlgo.h"
-
+#include "MarksAnalysers/TrackingParticleComparison/interface/TPComparisonNtuple.h"
 
 class MultiTrackValidator : public edm::EDAnalyzer, protected MultiTrackValidatorBase {
  public:
@@ -32,6 +32,7 @@ class MultiTrackValidator : public edm::EDAnalyzer, protected MultiTrackValidato
 
 
  protected:
+  tpanalyser::TPComparisonNtuple comparisonNtuple_;
   //these are used by MTVGenPs
   edm::InputTag associatormap;
   bool UseAssociators;

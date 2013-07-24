@@ -23,6 +23,14 @@
 #include <TH1F.h>
 #include <TH2F.h>
 
+//
+// Forward declaraions
+//
+namespace tpanalyser
+{
+	class TPComparisonNtuple;
+}
+
 class MTVHistoProducerAlgo{
  public:
   
@@ -30,6 +38,8 @@ class MTVHistoProducerAlgo{
   virtual ~MTVHistoProducerAlgo() {}
   // to be implemented in the concrete classes
   virtual void initialize()=0; 
+
+  virtual void setDebugNtuple( tpanalyser::TPComparisonNtuple* ntuple ) {}
 
   void setDQMStore(DQMStore* dbe) {dbe_ = dbe;}
 

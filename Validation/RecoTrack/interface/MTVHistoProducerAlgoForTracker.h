@@ -19,7 +19,13 @@
 #include <TH1F.h>
 #include <TH2F.h>
 
-
+//
+// Forward declarations
+//
+namespace tpanalyser
+{
+	class TPComparisonNtuple;
+}
 
 class MTVHistoProducerAlgoForTracker: public MTVHistoProducerAlgo {
  public:
@@ -27,6 +33,8 @@ class MTVHistoProducerAlgoForTracker: public MTVHistoProducerAlgo {
   virtual ~MTVHistoProducerAlgoForTracker();
 
   void initialize(){setUpVectors();};
+
+  virtual void setDebugNtuple( tpanalyser::TPComparisonNtuple* ntuple );
 
   void bookSimHistos();
 
@@ -91,6 +99,7 @@ class MTVHistoProducerAlgoForTracker: public MTVHistoProducerAlgo {
 
 
  private:
+  tpanalyser::TPComparisonNtuple* pComparisonNtuple_;
 
   // private methods for internal usage
   void setUpVectors();
