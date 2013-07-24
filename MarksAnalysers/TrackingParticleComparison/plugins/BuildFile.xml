@@ -1,0 +1,7 @@
+<use name="MarksAnalysers/TrackingParticleComparison"/>
+<use name="FWCore/Framework"/>
+<use name="HepMC"/>
+<use name="SimDataFormats/TrackingAnalysis"/>
+<library file="*.cc" name="MarksAnalysersTrackingParticleComparisonPlugins">
+	<flags   EDM_PLUGIN="1"/>
+</library>

@@ -1,0 +1,62 @@
+// Compile this with: "$CMSSW_RELEASE_BASE/../../../external/protobuf/2.4.1/bin/protoc -I $CMSSW_BASE/src/MarksAnalysers/TrackingParticleComparison/src --cpp_out=$CMSSW_BASE/src/MarksAnalysers/TrackingParticleComparison/src $CMSSW_BASE/src/MarksAnalysers/TrackingParticleComparison/src/TrackingParticleNtuple.proto"
+package tpanalyserproto;
+
+message SimTrack
+{
+	optional int64 event = 1;
+	optional int64 bunch_crossing = 2;
+	optional uint64 track_id = 3;
+	optional int64 charge = 4;
+	optional float mom_x = 5;
+	optional float mom_y = 6;
+	optional float mom_z = 7;
+	optional int64 type = 8;
+}
+
+message TrackingParticle
+{
+	repeated SimTrack sim_track = 1;
+	optional TrackingVertex parent_vertex = 2;
+	repeated TrackingVertex decay_vertex = 3;
+	optional int64 pdg_id = 4;
+}
+
+message TrackingVertex
+{
+	optional float position_x = 1;
+	optional float position_y = 2;
+	optional float position_z = 3;
+}
+
+message MatchedTrack
+{
+	optional float eta = 1;
+	optional float pt = 2;
+	optional float dxy_reconstructed = 3;
+	optional float dz_reconstructed = 4;
+	optional float dxy_simulated = 5;
+	optional float dz_simulated = 6;
+}
+
+message TrackingParticleCollection
+{
+	repeated TrackingParticle tracking_particle = 1;
+}
+
+message MatchedTrackCollection
+{
+	repeated MatchedTrack matched_track = 1;
+	optional string name = 2;
+}
+
+message Event
+{
+	repeated TrackingParticleCollection tracking_particle_collection = 1;
+	repeated MatchedTrackCollection matched_track_collection = 2;
+	optional TrackingVertex beam_spot = 3;
+}
+
+message Sample
+{
+	repeated Event event = 1;
+}

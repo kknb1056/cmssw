@@ -1,0 +1,4 @@
+<use name="MarksAnalysers/TrackingParticleComparison"/>
+<use name="root"/>
+<bin name="analyseTrackingParticleNtuples" file="analyseTrackingParticleNtuples.cpp"/>
+<bin name="analyseDzResolution" file="analyseDzResolution.cpp"/>
