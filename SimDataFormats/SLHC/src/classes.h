@@ -57,6 +57,11 @@ namespace
     std::vector< std::vector< edm::Ptr<L1TkStub_PixelDigi_ > > > S_PD_C_C;
     edm::Wrapper<std::vector< std::vector< edm::Ptr< L1TkStub_PixelDigi_ > > > > S_PD_C_CW;
 
+	// for L1TrackTriggerObjects
+    edm::Ptr<L1TkTrack_PixelDigi_ > P_T_PD_C;
+    std::vector< std::vector< edm::Ptr<L1TkTrack_PixelDigi_ > > > T_PD_C_C;
+    edm::Wrapper<std::vector< std::vector< edm::Ptr< L1TkTrack_PixelDigi_ > > > > T_PD_C_CW;
+
 
 /*
     // Anders tracks
@@ -176,6 +181,7 @@ namespace {
 
 #include "SimDataFormats/SLHC/interface/L1TowerJet.h"
 #include "SimDataFormats/SLHC/interface/L1TowerJetFwd.h"
+#include "SimDataFormats/SLHC/interface/L1EGCrystalCluster.h"
 
 #include "SimDataFormats/SLHC/interface/EtaPhiContainer.h"
 
@@ -215,6 +221,10 @@ namespace {
     l1slhc::L1TowerJetCollection                   l1towerjetcoll;
     edm::Wrapper< l1slhc::L1TowerJetCollection >   wl1towerjetcol;
 
+    l1slhc::L1EGCrystalCluster                       egcrystalcluster;
+    std::vector<l1slhc::L1EGCrystalCluster>         l1egcrystalclustervec;
+    l1slhc::L1EGCrystalClusterCollection            l1egcrystalclustercoll;
+    edm::Wrapper<l1slhc::L1EGCrystalClusterCollection>   wl1egcrystalclustercoll;
   }
 }
 
