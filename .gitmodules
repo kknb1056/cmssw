@@ -1,0 +1,3 @@
+[submodule "L1Trigger/MenuGeneration"]
+	path = L1Trigger/MenuGeneration
+	url = git@github.com:kknb1056/MenuGeneration.git
