@@ -1,0 +1,12 @@
+[submodule "L1Trigger/UCT2015"]
+	path = L1Trigger/UCT2015
+	url = https://github.com/uwcms/UCT2015.git
+[submodule "L1Trigger/MenuGeneration"]
+	path = L1Trigger/MenuGeneration
+	url = git@github.com:kknb1056/MenuGeneration.git
+[submodule "UserCode/L1TriggerUpgrade"]
+	path = UserCode/L1TriggerUpgrade
+	url = git@github.com:kknb1056/L1TriggerUpgrade.git
+[submodule "UserCode/L1TriggerDPG"]
+	path = UserCode/L1TriggerDPG
+	url = git@github.com:kknb1056/L1TriggerDPG.git
