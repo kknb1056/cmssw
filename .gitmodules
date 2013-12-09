@@ -10,3 +10,6 @@
 	path = L1Trigger/MenuGeneration
 	url = git@github.com:kknb1056/MenuGeneration.git
 	branch = firstTryWithL1Tracks
+[submodule "L1Trigger/UCT2015"]
+	path = L1Trigger/UCT2015
+	url = https://github.com/uwcms/UCT2015.git
